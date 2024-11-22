@@ -36,7 +36,101 @@ The decoding process produces incorrect results because it cannot differentiate 
 
 ## Solution
 
-
+### Solution 1 using Idea 1
 ```Python
+class Solution:
+    """
+    @param: strs: a list of strings
+    @return: encodes a list of strings to a single string.
+    """
+    # arr = []
+    dic = {} # class level attribute
+    def encode(self, strs):
+        # write your code here
+        encode = ""
+        arr = []
 
+        # if empty
+        if not strs:
+            return ""
+
+        # count length and append
+        for str in strs:
+            arr.append(len(str))
+            encode += str
+        
+        self.dic[encode] = arr
+
+        return encode
+
+    """
+    @param: str: A string
+    @return: decodes a single string to a list of strings
+    """
+    def decode(self, str):
+        # write your code here
+        arr = self.dic[str]
+
+        i=0
+        index = 0
+        decode = []
+        while i < len(str) and index < len(arr):
+
+            j = i + arr[index]
+
+            decode.append(str[i:j])
+            i = j
+
+        return decode
 ```
+
+## Wrong Solutions
+
+### Wrong Solution 1
+```Python
+class Solution:
+    """
+    @param: strs: a list of strings
+    @return: encodes a list of strings to a single string.
+    """
+    # arr = []
+    dic = {} # class level attribute
+    def encode(self, strs):
+        # write your code here
+        encode = ""
+        arr = []
+
+        # if empty
+        if not strs:
+            return ""
+
+        # count length and append
+        for str in strs:
+            arr.append(len(str))
+            encode += str
+        
+        dic[encode] = arr
+
+        return encode
+
+    """
+    @param: str: A string
+    @return: decodes a single string to a list of strings
+    """
+    def decode(self, str):
+        # write your code here
+        arr = dic[str]
+
+        i=0
+        index = 0
+        decode = []
+        while i < len(str) and index < len(arr):
+
+            j = i + arr[index]
+
+            decode.append(str[i:j])
+            i = j
+
+        return decode
+```
+Reason: The `dic` dictionary is defined at the class level. Instead, we should use `self.dic` to define and access the dictionary at the instance level. `self.dic` will be initialized in the __init__ method, making it an instance-level variable.
