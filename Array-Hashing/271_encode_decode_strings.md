@@ -132,7 +132,19 @@ class Solution:
         return decode
 ```
 ---
+### Time and Space Complexities of Solution 1
+`Encode`:
 
+Time: O(n), n is the amount of strings in the list
+
+Space: O(n), n is the amount of strings in the list
+
+`Decode`:
+
+Time: O(n), n is the amount of strings in the list
+
+Space: O(n), n is the amount of strings in the list
+---
 ## Wrong Solutions
 
 ### Wrong Solution 1
