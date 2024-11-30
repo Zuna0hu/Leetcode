@@ -23,24 +23,37 @@ O(n) + O(n+1) + O(n+2) + \dots + O(n+k)
 
 If this series grows as a sum of increasing numbers, it typically results in a quadratic time complexity, where the total operations are proportional to the square of the size of the input. The complexity in such a case is \( O(n^2) \).
 
-## Hypothesis: Upper Limit of Operations
+### Time Complexity with Bounded Input
 
-In many real-world cases, the growth of the number of operations is limited. Specifically, the total number of operations might not increase indefinitely. If there is an upper limit on the size of operations (for example, the length of the strings being processed), this can influence the time complexity.
+If there is a bounded upper limit on the size of each string or operation (e.g., the length of each string is between 1 and 100), the time complexity can still be considered \( O(n^2) \). This is because the number of operations grows proportionally to \( n^2 \), but the constant factor (due to the fixed upper limit on the string length) does not change the quadratic nature of the overall time complexity.
 
-### Bounded Operations:
+For example, if the string lengths are bounded between 1 and 100, the time complexity remains \( O(n^2) \), since each concatenation operation still requires copying increasing portions of the string in a nested manner.
 
-If each operation grows but has an upper bound, the algorithm may appear to be quadratic based on the operations but is constrained to a linear or logarithmic growth due to the limit on the size of each step.
+### Formalizing with the Squeeze Theorem
 
-For instance, if the number of elements or size of each operation has an upper limit, the algorithm might run in \( O(n) \) or \( O(n \log n) \), even if the algorithm involves nested iterations or growing operations.
+We can formalize the time complexity analysis by comparing the series of operations with two other series. Consider the total cost of all concatenations:
+
+\[
+O(l1) + O(l1+l2) + O(l1+l2+l3) + \dots + O(l1+l2+\dots+ln)
+\]
+
+Where \( l1, l2, \dots, ln \) are the lengths of the strings. This series grows incrementally, but we can bound it between two other series:
+
+1. The lower bound: \( O(1) + O(2) + \dots + O(k') \), where \( k' \) is the number of operations, which grows at least linearly.
+
+2. The upper bound: \( O(100) + O(200) + \dots + O(k'') \), where \( k'' \) is the largest value that the operation length can take (e.g., 100 in your case).
+
+Both of these upper and lower bounds grow as \( O(k^2) \), where \( k \) is the total length of the strings processed. Using the **Squeeze Theorem**, if the series lies between two other series that are both \( O(k^2) \), we can conclude that the overall complexity is also \( O(k^2) \).
+
+Thus, even though the string lengths are bounded (e.g., between 1 and 100), the time complexity remains \( O(n^2) \), as the operations still grow quadratically in terms of the number of strings.
 
 ## Space Complexity
 
-While time complexity is typically \( O(n^2) \) in quadratic algorithms, space complexity depends on how the algorithm stores intermediate data or results. For example, if the algorithm stores data in an additional list or array, the space complexity could be \( O(n) \), \( O(n^2) \), or even higher, depending on the structure used. If only a small amount of space is used for temporary variables, the space complexity might be much lower.
+While time complexity is typically \( O(n^2) \) in quadratic algorithms, space complexity depends on how the algorithm stores intermediate data or results. For example, if the algorithm stores data in an additional list or array, the space complexity could be \( O(n) \), \( O(n^2) \), or even higher, depending on the structure used. However, if each string's length is bounded (e.g., between 1 and 100), the space complexity is usually manageable and could remain linear or slightly higher, based on the number of strings and their length.
 
 ## Conclusion
 
-To determine if an algorithm is quadratic, observe:
-- If the algorithm involves nested operations or operations that grow larger with each iteration.
-- If the total number of operations grows as the square of the size of the input (time complexity is \( O(n^2) \)).
-- Be mindful of the hypothesis that each operation or operation size might have an upper limit, which can impact whether the algorithm truly exhibits quadratic complexity.
-- Space complexity can vary, depending on how the algorithm stores or manipulates data.
+To determine if an algorithm is quadratic:
+- **Time complexity**: If the number of operations grows as the square of the input size, it is \( O(n^2) \). Even with an upper limit on string length, the quadratic growth still holds.
+- **Space complexity**: Can vary depending on how data is stored and manipulated. In cases where string length is bounded, space complexity may remain manageable, typically \( O(n) \) or higher depending on the data structure used.
+- By applying the **Squeeze Theorem**, we see that the series of operations grows at a rate consistent with \( O(n^2) \), even when the string lengths are bounded.
