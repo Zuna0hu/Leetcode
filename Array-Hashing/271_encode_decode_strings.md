@@ -134,16 +134,75 @@ class Solution:
 ---
 ### Time and Space Complexities of Solution 1
 `Encode`:
+```Python
+def encode(self, strs):
+        # write your code here
+        encode = ""
 
-Time: O(n), n is the amount of strings in the list
+        # if empty
+        if not strs: # a simple check, O(1)
+            return ""
 
-Space: O(n), n is the amount of strings in the list
+        # count length and append
+        for str in strs: # n times
+            self.arr.append(len(str)) # add an integer to a list, O(1)
+            encode += str #  Python creates a new string that is the concatenation of the current string and str, and then assigns this new string back to encode, so it is O(k) where k is the total length of (encode + str)
+        
+        #self.dic[encode] = arr
+
+        return encode
+```
+
+Time: O(k^2), where k is the total length of the all the strings in the list.
+
+As in the `for` loop, to run `encode += str`, in Python, string concatenation creates a new string by copying the existing string (encode) and appending the new string (str), which takes O(k), where k is the total length of encode + str. Over n iterations, the total cost of concatenation grows incrementally, as the length of encode increases with each iteration:
+
+(l1) + (l1+l2) + (l1+l2+l3) + (l1+l2+l3+l4) ... + k
+
+The total cost of all concatenations is proportional to:
+
+O(l1) + O(l1+l2) + O(l1+l2+l3) + O(l1+l2+l3+l4) ... + O(k)
+
+This results in a quadratic time complexity: O(k^2) in the worst case.
+---
+
+Space: O(n+k), where n is the amount of strings in the list and k is the total length of the all the strings in the list.
+
+As `self.arr` has O(n) space complexity, and `encode` has O(k) space complexity.
+---
 
 `Decode`:
 
-Time: O(n), n is the amount of strings in the list
+```Python
+def decode(self, str):
 
-Space: O(n), n is the amount of strings in the list
+        i=0 # O(1)
+        index = 0 # O(1)
+        decode = []
+        while i < len(str) and index < len(self.arr): # run n times, n is the amount of strings in the list
+
+            j = i + self.arr[index] # O(1)
+
+            decode.append(str[i:j]) # slicing string, O(li), li is the length of the ith element; apeending O(1)
+            i = j
+            index += 1
+
+        return decode
+```
+Time: O(n+k), where n is the amount of strings in the list and k is the total length of the all the strings in the list.
+
+As in the `for` loop, to run `decode.append(str[i:j])`, the total time is proportional to:
+
+O(l1+l2+...+ln) = O(k), k is the total length of the all the strings in the list.
+
+Also in the `for` loop,  other steps that take O(1) individually will be O(n) in total.
+
+So the sum will be:
+
+O(k) + O(n) = O(k+n)
+---
+
+Space: O(k), k is the total length of the all the strings in the list. As we need to append every character to `decode`.
 ---
 ## Wrong Solutions
 
