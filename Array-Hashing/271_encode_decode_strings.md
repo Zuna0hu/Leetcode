@@ -164,11 +164,13 @@ The total cost of all concatenations is proportional to:
 O(l1) + O(l1+l2) + O(l1+l2+l3) + O(l1+l2+l3+l4) ... + O(k)
 
 This results in a quadratic time complexity: O(k^2) in the worst case.
+
 ---
 
 Space: O(n+k), where n is the amount of strings in the list and k is the total length of the all the strings in the list.
 
 As `self.arr` has O(n) space complexity, and `encode` has O(k) space complexity.
+
 ---
 
 `Decode`:
@@ -200,10 +202,13 @@ Also in the `for` loop,  other steps that take O(1) individually will be O(n) in
 So the sum will be:
 
 O(k) + O(n) = O(k+n)
+
 ---
 
 Space: O(k), k is the total length of the all the strings in the list. As we need to append every character to `decode`.
+
 ---
+
 ## Wrong Solutions
 
 ### Wrong Solution 1
