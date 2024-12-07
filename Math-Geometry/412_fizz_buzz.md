@@ -1,6 +1,6 @@
 # Leetcode 412: Fizz Buzz 
 ## Problem Description
-Link: [Leetcode Problem 412] (https://leetcode.com/problems/fizz-buzz/description/)
+Link: [Leetcode Problem 412](https://leetcode.com/problems/fizz-buzz/description/)
 
 Given an integer `n`, return a string array `answer` (1-indexed) where:
 
@@ -64,7 +64,7 @@ for i in range(1, n+1):
 n = input("What is your number?")
 
 for i in range(1, n+1):
-    if n % 3 == 0:
+    if i % 3 == 0:
         print("Fizz")
 ```
 
@@ -73,9 +73,9 @@ for i in range(1, n+1):
 n = input("What is your number?")
 
 for i in range(1, n+1):
-    if n % 3 == 0:
+    if i % 3 == 0:
         print("Fizz")
-    elif n % 5 == 0:
+    elif i % 5 == 0:
         print("Buzz")
 ```
 
@@ -84,11 +84,11 @@ for i in range(1, n+1):
 n = input("What is your number?")
 
 for i in range(1, n+1):
-    if n % 15 == 0:
+    if i % 15 == 0:
         print("FizzBuzz") 
-    elif n % 3 == 0:
+    elif i % 3 == 0:
         print("Fizz")
-    elif n % 5 == 0:
+    elif i % 5 == 0:
         print("Buzz")
 ```
 
@@ -97,14 +97,14 @@ for i in range(1, n+1):
 n = input("What is your number?")
 
 for i in range(1, n+1):
-    if n % 15 == 0:
+    if i % 15 == 0:
         print("FizzBuzz") 
-    elif n % 3 == 0:
+    elif i % 3 == 0:
         print("Fizz")
-    elif n % 5 == 0:
+    elif i % 5 == 0:
         print("Buzz")
     else:
-        print(n)
+        print(i)
 ```
 
 We get the complete code!
