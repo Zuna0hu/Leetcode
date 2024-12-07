@@ -64,8 +64,6 @@ Write a program that allows the user to enter a number, print each number betwee
 
 ### Step 2: Plan
 
-Does your program have an interface? What will it look like? Our FizzBuzz solution will be a browser console program, so we don’t need an interface. The only user interaction will be allowing users to enter a number.
-
 - **Sketch User Interface**: Does your program have a user interface, what will it look like and what functionality will it have? **Our FizzBuzz solution will be a browser console program, so we don’t need an interface. The only user interaction will be allowing users to enter a number.**
 
 - **Inputs**: What inputs your program has and the source of those inputs. **The user will enter a number from a prompt (popup box).**
