@@ -254,6 +254,7 @@ Now it is finished!
 ### Time and Space Complexity
 
 Time: O(n)
+
 Space: O(n)
 
 ### Result
@@ -261,3 +262,62 @@ Space: O(n)
 Runtime: 37 ms, faster than 20.10% of Python3 online submissions for Product of Array Except Self.
 
 Memory Usage: 26.5 MB, less than 5.34% of Python3 online submissions for Product of Array Except Self.
+
+### Optimization
+
+We can optimize the process by not using any external storage other than results array.
+
+```Python
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+    
+    ans = [] # final answer
+    
+    product = 1
+    # left_product = 1
+    # left_arr = []
+
+    # right_product = 1
+    # right_arr = []
+
+    # get left products
+    for i in range(len(nums)):
+        if i == 0:
+            ans.append(1)
+            product*=nums[i]
+        else:
+            ans.append(product)
+            product*=nums[i]
+
+    product = 1
+
+    # get right products
+    for i in range(len(nums)-1,-1,-1): # O(1), constant-time operation because Python stores the length of lists internally as metadata.
+        if i == len(nums)-1:
+            # ans[i] *=1
+            product*=nums[i]
+        else:
+            # right_arr.insert(0,right_product) # O(n)
+            ans[i]*=product
+            product*=nums[i]
+    
+    # reverse it
+    # right_arr.reverse() # O(n)
+    
+    # get the answer        
+    # for i in range(len(nums)):
+    #   ans.append(left_arr[i]*right_arr[i])
+
+    # return output array
+    return ans
+```
+- **Complexity**:
+
+Time: O(n), n is the length of `nums[]`
+
+Space: O(1) (since we measure auxiliary space used by the algorithm only, in this case `ans[]` is required and necessary no matter what kind of implementation we have)
+
+- **Result**:
+
+Runtime: 22 ms, faster than 66.84% of Python3 online submissions for Product of Array Except Self.
+
+Memory Usage: 22.9 MB, less than 51.29% of Python3 online submissions for Product of Array Except Self.
