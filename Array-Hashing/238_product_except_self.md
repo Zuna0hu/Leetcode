@@ -256,3 +256,8 @@ Now it is finished!
 Time: O(n)
 Space: O(n)
 
+### Result
+
+Runtime: 37 ms, faster than 20.10% of Python3 online submissions for Product of Array Except Self.
+
+Memory Usage: 26.5 MB, less than 5.34% of Python3 online submissions for Product of Array Except Self.
