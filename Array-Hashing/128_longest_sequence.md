@@ -90,3 +90,35 @@ RETURN maximum_len
 But because the range from `minimum_num` to 'maximum_num' can be from -10^9 to 10^9 (`-10^9 <= nums[i] <= 10^9`), so this loop can take way longer time than `For every num in nums`, as `0 <= nums.length <= 1000`.
 
 So instead of traversing on the x-axis, it might be a better idea to just traverse on the `dictionary`. We can also use a `set` in place of `dictionary`.
+
+```Bash
+INIT set
+READ nums
+SET maximum_len = 0
+SET left_index
+
+FOR every num in nums:
+    IF the num is NOT IN set:
+        ADD the num to set
+    ELSE:
+        skip
+
+SET sorted_list = sorted version of set
+
+left_index = 0
+
+FOR every num in sorted_list:
+    IF the subsequence from left index to current num is consecutive: 
+        IF the length of current subsequence > maximum_len:
+            UPDATE maximum_len
+    ELSE:
+        SET left_index to current index
+
+RETURN maximum_len 
+```
+
+### Steps 4: Divide and Conquer
+
+To solve each subproblem, we can use the steps of problem solving again, but this time it is a smaller and more specific problem.
+
+#### **First Subproblem**: Set Initial Product
