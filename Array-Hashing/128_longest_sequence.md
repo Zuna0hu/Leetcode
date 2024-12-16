@@ -95,7 +95,7 @@ So instead of traversing on the x-axis, it might be a better idea to just traver
 INIT set
 READ nums
 SET maximum_len = 0
-SET left_index
+SET left_index = 0
 
 FOR every num in nums:
     IF the num is NOT IN set:
@@ -104,8 +104,6 @@ FOR every num in nums:
         skip
 
 SET sorted_list = sorted version of set
-
-left_index = 0
 
 FOR every num in sorted_list:
     IF the subsequence from left index to current num is consecutive: 
@@ -121,4 +119,73 @@ RETURN maximum_len
 
 To solve each subproblem, we can use the steps of problem solving again, but this time it is a smaller and more specific problem.
 
-#### **First Subproblem**: Set Initial Product
+#### **First Subproblem**: Initialization
+
+```Python
+my_set = set()
+maximum_len = 0
+left_index = 0
+```
+
+#### **Second Subproblem**: Push into Set
+
+```Python
+my_set = set()
+maximum_len = 0
+left_index = 0
+
+for num in nums:
+    if num not in my_set:
+        my_set.add(num)
+```
+
+#### **Third Subproblem**: Sort the Set
+
+```Python
+my_set = set()
+maximum_len = 0
+left_index = 0
+
+for num in nums:
+    if num not in my_set:
+        my_set.add(num)
+
+sorted_list = sorted(my_set)
+
+```
+
+#### **Fourth Subproblem**: Loop Through the Sorted List
+
+```Python
+my_set = set()
+maximum_len = 0
+left_index = 0
+
+for num in nums:
+    if num not in my_set:
+        my_set.add(num)
+
+sorted_list = sorted(my_set)
+
+for i in range(len(sorted_list)):
+    if i - left_index == (sorted_list[i]-sorted_list[left_index]):
+        if i - left_index + 1 > maximum_len:
+            maximum_len = i - left_index + 1
+    
+    else:
+        left_index = i
+
+return maximum_len
+```
+
+### Time and Space Complexity
+
+Time: O(nlogn), n is the length of input list `nums`. It is O(nlogn) because we used the `sorted()` function in Python.
+
+Space: O(n), n is the length of input list `nums`. As in the worst case the set `my_set` will have n elements.
+
+### Result
+
+Runtime: 58 ms, faster than 57.77% of Python3 online submissions for Longest Consecutive Sequence.
+
+Memory Usage: 33.8 MB, less than 20.20% of Python3 online submissions for Longest Consecutive Sequence.
