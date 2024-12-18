@@ -189,3 +189,72 @@ Space: O(n), n is the length of input list `nums`. As in the worst case the set 
 Runtime: 58 ms, faster than 57.77% of Python3 online submissions for Longest Consecutive Sequence.
 
 Memory Usage: 33.8 MB, less than 20.20% of Python3 online submissions for Longest Consecutive Sequence.
+
+
+### Optimization
+
+A better solution is to use the following process:
+
+Take `[100, 4, 200, 1, 3, 2]` as an example:
+
+On the axis, it would be like `---- 1, 2, 3, 4 ----- 100 ------ 200 ----`
+
+This process if like my process of drawing a x-axis and note every number that appears in the `nums`, and moving my pen from left to right to count which line segment is the longest, and outputing that length.
+
+But this solution does not create an ordered list to mimic the axis, rather, it just finds the head, aka. the leftmost number of each line segment first, and uses a while loop of keep adding one to the head number to simulate the process of moving the pen from left to right.
+
+
+
+```Bash
+INIT set
+READ nums
+SET maximum_len = 0
+SET current_len = 0
+
+FOR every num in nums:
+    IF the num is NOT IN set:
+        ADD the num to set
+    ELSE:
+        skip
+
+FOR every num in set:
+    IF it is the start point of a line segment:
+        WHILE it is still at the set:
+            ADD one to the num
+        calculate the length
+        IF the current length > maximum_len:
+            UPDATE maximum_len
+    ELSE:
+        skip
+
+RETURN maximum_len 
+```
+To find the head, aka. the leftmost number of each line segment, we just need to check if the number to the left of it `num-1` is in the set. If not, it means it is a start point of a line segment.
+
+The implementation is like:
+
+```Python
+maximum_len = 0
+my_set = set(nums)
+
+for i in my_set:
+    if (i-1) not in my_set:
+        current_len = 1
+        while (i + current_len) in my_set:
+            current_len += 1
+        maximum_len = max(maximum_len, current_len)
+
+return maximum_len
+```
+
+- **Complexity**:
+
+Time: O(n), n is the length of `nums`, as every element in `nums` will at most be visited twice, once to check if it is the start point, the other time - only if it is part of the line segment - it will be checked if it is in `my_set`.
+
+Space: O(n), n is the length of `nums`, as in the worst case every number in `nums` will be stored in `my_set`.
+
+- **Result**:
+
+Runtime: 31 ms, faster than 99.23% of Python3 online submissions for Longest Consecutive Sequence.
+
+Memory Usage: 34.2 MB, less than 15.77% of Python3 online submissions for Longest Consecutive Sequence.
